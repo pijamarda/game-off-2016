@@ -134,7 +134,7 @@ trigger = false
 
 [node name="BackGround" type="Sprite" parent="."]
 
-transform/pos = Vector2( 235, 125 )
+transform/pos = Vector2( 225, 125 )
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 200, 0, 50, 50 )

@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://circuits.png" type="Texture" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="horizontal-middle" type="Sprite" parent="."]
+
+transform/pos = Vector2( 16, 16 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 64, 0, 32, 32 )
+
+[node name="horizontal-left" type="Sprite" parent="."]
+
+transform/pos = Vector2( 80, 16 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 32, 0, 32, 32 )
+
+[node name="horizontal-right" type="Sprite" parent="."]
+
+transform/pos = Vector2( 144, 16 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+
