@@ -1,11 +1,11 @@
 [gd_resource type="TileSet" load_steps=7 format=1]
 
-[ext_resource path="res://images/32x32/cable0001.png" type="Texture" id=1]
-[ext_resource path="res://images/32x32/cable0101.png" type="Texture" id=2]
-[ext_resource path="res://images/32x32/cable0100.png" type="Texture" id=3]
-[ext_resource path="res://images/32x32/cable1010.png" type="Texture" id=4]
-[ext_resource path="res://images/32x32/cable1000.png" type="Texture" id=5]
-[ext_resource path="res://images/32x32/cable0010.png" type="Texture" id=6]
+[ext_resource path="res://images/cables/32x32/cable0001.png" type="Texture" id=1]
+[ext_resource path="res://images/cables/32x32/cable0101.png" type="Texture" id=2]
+[ext_resource path="res://images/cables/32x32/cable0100.png" type="Texture" id=3]
+[ext_resource path="res://images/cables/32x32/cable1010.png" type="Texture" id=4]
+[ext_resource path="res://images/cables/32x32/cable1000.png" type="Texture" id=5]
+[ext_resource path="res://images/cables/32x32/cable0010.png" type="Texture" id=6]
 
 [resource]
 
