@@ -19,7 +19,7 @@ script/script = ExtResource( 1 )
 
 transform/pos = Vector2( 16, 304 )
 
-[node name="horse2" type="KinematicBody2D" parent="map/horse"]
+[node name="kinematic_horse" type="KinematicBody2D" parent="map/horse"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
@@ -29,12 +29,12 @@ collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
 
-[node name="Sprite" type="Sprite" parent="map/horse/horse2"]
+[node name="Sprite" type="Sprite" parent="map/horse/kinematic_horse"]
 
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 32, 32 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="map/horse/horse2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/horse/kinematic_horse"]
 
 shape = SubResource( 1 )
 trigger = false
