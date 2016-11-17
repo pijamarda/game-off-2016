@@ -4,10 +4,10 @@
 [ext_resource path="res://scenes/map3.tscn" type="PackedScene" id=2]
 [ext_resource path="res://images/horse_32_32.png" type="Texture" id=3]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( 16, -16, 16, 16, -16, 16, -16, -16 )
+extents = Vector2( 16, 16 )
 
 [node name="game" type="Node2D"]
 
@@ -20,30 +20,26 @@ script/script = ExtResource( 1 )
 transform/pos = Vector2( 32, 288 )
 __meta__ = { "_edit_group_":true }
 
-[node name="Sprite" type="Sprite" parent="map/horse"]
+[node name="KinematicBody2D" type="KinematicBody2D" parent="map/horse"]
 
 transform/pos = Vector2( -16, 16 )
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 32, 32 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="map/horse/Sprite"]
-
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
+collision/margin = 0.08
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map/horse/Sprite/StaticBody2D"]
+[node name="Sprite" type="Sprite" parent="map/horse/KinematicBody2D"]
 
-build_mode = 0
-polygon = Vector2Array( -16, -16, -16, 16, 16, 16, 16, -16 )
-shape_range = Vector2( 0, 0 )
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map/horse/KinematicBody2D"]
+
+shape = SubResource( 1 )
 trigger = false
+_update_shape_index = 0
 
 
