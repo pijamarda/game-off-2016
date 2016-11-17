@@ -19,7 +19,7 @@ func _ready():
 	# Initialization here
 	screen_size = get_viewport_rect().size
 	set_process_input(true)
-	set_process(true)
+	set_fixed_process(true)
 	
 func _input(event):
 	
@@ -40,9 +40,10 @@ func _input(event):
 			horse_pos.y = BOT_POSITION_Y
 			horse_state = 1
 
-func _process(delta):
+func _fixed_process(delta):
 	#horse_pos = get_node("map/horse").get_pos()
 	horse_pos += horse_direction * horse_speed * delta
+	get_node("map/horse/horse2").move(Vector2(0,1))
 	
 	if (horse_pos.x < 32 or horse_pos.x > screen_size.x - 32):
 	    horse_direction.x = -horse_direction.x
