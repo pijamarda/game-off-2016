@@ -49,7 +49,7 @@ points = Vector2Array( 3.07764, -42.7701, 33.595, -37.4627, 38.9023, 9.64017, -2
 custom_solver_bias = 0.0
 points = Vector2Array( -113.684, -35.4724, -91.7915, -64.6629, -75.206, 12.9573, -104.396, -1.63797 )
 
-[node name="Node2D" type="Node2D"]
+[node name="map" type="Node2D"]
 
 [node name="background" type="Sprite" parent="."]
 

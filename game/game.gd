@@ -21,6 +21,9 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	set_process_input(true)
 	set_fixed_process(true)
+	var scene_map = load("res://scenes/map3.tscn")
+	var map = scene_map.instance()
+	get_node(".").add_child(map)
 	var scene = load("res://scenes/horse.tscn")
 	var horse = scene.instance()
 	get_node("map").add_child(horse)
@@ -59,6 +62,10 @@ func _fixed_process(delta):
 	if get_node("map/horse/kinematic_horse").is_colliding():
 		print("Mueres")
 		get_node("map/horse").free()
+		get_node("map").free()
+		var scene_map = load("res://scenes/map4.tscn")
+		var map = scene_map.instance()
+		get_node(".").add_child(map)
 		var scene = load("res://scenes/horse.tscn")
 		var horse = scene.instance()
 		get_node("map").add_child(horse)
