@@ -1,15 +1,21 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://images/horse_32_32.png" type="Texture" id=1]
+[ext_resource path="res://images/horses/trojanhorse.png" type="Texture" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 16, 16 )
+points = Vector2Array( 33.2635, 21.5403, 45.943, 79.086, -2.82448, 77.1353, -18.9178, 75.1846, -45.7399, 41.535, -46.2276, -18.9367, 4.97833, -36.9807 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 4.97833, -36.9807, 21.5593, -77.9453, 47.4061, -68.1918, 33.2635, 21.5403 )
 
 [node name="horse" type="Node2D"]
 
-transform/pos = Vector2( 16, 304 )
+transform/pos = Vector2( 40.4137, 308 )
+__meta__ = { "_edit_group_":true }
 
 [node name="kinematic_horse" type="KinematicBody2D" parent="."]
 
@@ -17,6 +23,9 @@ input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
 collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
@@ -26,10 +35,11 @@ collision/margin = 0.08
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 32, 32 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="kinematic_horse"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="kinematic_horse"]
 
-shape = SubResource( 1 )
+build_mode = 0
+polygon = Vector2Array( 21.5593, -77.9453, 4.97833, -36.9807, -46.2276, -18.9367, -45.7399, 41.535, -18.9178, 75.1846, -2.82448, 77.1353, 45.943, 79.086, 33.2635, 21.5403, 47.4061, -68.1918 )
+shape_range = Vector2( 0, 1 )
 trigger = false
-_update_shape_index = 0
 
 
