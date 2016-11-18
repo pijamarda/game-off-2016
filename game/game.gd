@@ -14,12 +14,17 @@ var BOT_POSITION_Y = 480
 var horse_state = 0 # -1 means top, 0 mid, 1 bottom
 var horse_pos = Vector2(32,288)
 
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	screen_size = get_viewport_rect().size
 	set_process_input(true)
 	set_fixed_process(true)
+	var scene = load("res://scenes/horse.tscn")
+	var horse = scene.instance()
+	get_node("map").add_child(horse)
+	
 	
 func _input(event):
 	
@@ -53,8 +58,10 @@ func _input(event):
 func _fixed_process(delta):
 	if get_node("map/horse/kinematic_horse").is_colliding():
 		print("Mueres")
-		get_node("map/horse").set_pos(Vector2(16,304))
-		#get_node("map/horse/kinematic_horse").set_pos(Vector2(16,304))
+		get_node("map/horse").free()
+		var scene = load("res://scenes/horse.tscn")
+		var horse = scene.instance()
+		get_node("map").add_child(horse)
 	else:
 		get_node("map/horse/kinematic_horse").move(Vector2(horse_direction,0))
 		if (get_node("map/horse/kinematic_horse").get_pos().x < 0 or get_node("map/horse/kinematic_horse").get_pos().x > screen_size.x - 32):
