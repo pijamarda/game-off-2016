@@ -57,6 +57,12 @@ func _input(event):
 	if(event.is_action("horse_right") and event.is_pressed() and !event.is_echo() ):
 		print("pulso right")
 		horse_direction = 1
+	if(event.is_action("escape") and event.is_pressed() and !event.is_echo() ):
+		print("pulso escape")
+		get_tree().set_pause(true)
+		get_node("/root/main/menu").show()
+		
+		
 
 func _fixed_process(delta):
 	if get_node("map/horse/kinematic_horse").is_colliding():
