@@ -29,6 +29,7 @@ func _ready():
 	get_node("map").add_child(horse)
 	
 	
+	
 func _input(event):
 	
 	if(event.is_action("horse_up") and event.is_pressed() and !event.is_echo() ):
@@ -79,7 +80,8 @@ func _fixed_process(delta):
 		get_node("map/horse/kinematic_horse").move(Vector2(horse_direction,0))
 		if (get_node("map/horse/kinematic_horse").get_pos().x < 0 or get_node("map/horse/kinematic_horse").get_pos().x > screen_size.x - 32):
 		    horse_direction = -horse_direction
-	
+		var camera = get_node("map/horse/camera")
+		
 func _draw():
 	
 	pass
