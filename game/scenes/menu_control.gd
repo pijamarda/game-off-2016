@@ -10,6 +10,11 @@ func _ready():
 	
 	pass
 
-func _input(ev):
-	if (ev.is_action("escape") and ev.pressed):
-		print("escape")
+func _on_quit_button_pressed():
+	get_tree().quit()
+
+
+func _on_start_button_pressed():	
+	var scene_game = load("res://scenes/game.tscn")
+	var game = scene_game.instance()
+	get_node("/root/main").add_child(game)

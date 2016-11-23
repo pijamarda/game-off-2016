@@ -23,7 +23,7 @@ points = Vector2Array( 46, -75, 46, 85, -50, 85, -50, -75 )
 
 [node name="background" type="Sprite" parent="."]
 
-transform/pos = Vector2( 1494.56, 302.107 )
+transform/pos = Vector2( 1013.46, 298.592 )
 transform/scale = Vector2( 0.896437, 0.570921 )
 texture = ExtResource( 1 )
 __meta__ = { "_edit_group_":true }

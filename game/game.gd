@@ -27,6 +27,9 @@ func _ready():
 	var scene = load("res://scenes/horse.tscn")
 	var horse = scene.instance()
 	get_node("map").add_child(horse)
+	var popup_menu_scene = load("res://scenes/popup_menu.tscn")
+	var popup_menu = popup_menu_scene.instance()
+	get_node(".").add_child(popup_menu)
 	
 	
 	
@@ -61,7 +64,7 @@ func _input(event):
 	if(event.is_action("escape") and event.is_pressed() and !event.is_echo() ):
 		print("pulso escape")
 		get_tree().set_pause(true)
-		get_node("/root/main/menu").show()
+		get_node("/root/main/game/popupmenu").show()
 		
 		
 
