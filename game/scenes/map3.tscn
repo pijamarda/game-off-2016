@@ -52,7 +52,7 @@ transform/pos = Vector2( 594, 299 )
 texture = ExtResource( 3 )
 __meta__ = { "_edit_group_":true }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Sprite"]
+[node name="firewall" type="StaticBody2D" parent="Sprite"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
@@ -65,7 +65,7 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/firewall"]
 
 build_mode = 0
 polygon = Vector2Array( -50, -75, -50, 85, 46, 85, 46, -75 )
@@ -78,7 +78,7 @@ transform/pos = Vector2( 1778, 491 )
 texture = ExtResource( 3 )
 __meta__ = { "_edit_group_":true }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Sprite1"]
+[node name="firewall" type="StaticBody2D" parent="Sprite1"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 2 )
@@ -91,7 +91,7 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite1/StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite1/firewall"]
 
 build_mode = 0
 polygon = Vector2Array( -50, -75, -50, 85, 46, 85, 46, -75 )
@@ -104,7 +104,7 @@ transform/pos = Vector2( 1202, 75 )
 texture = ExtResource( 3 )
 __meta__ = { "_edit_group_":true }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2"]
+[node name="firewall" type="StaticBody2D" parent="Sprite2"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 3 )
@@ -117,7 +117,7 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2/StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2/firewall"]
 
 build_mode = 0
 polygon = Vector2Array( -50, -75, -50, 85, 46, 85, 46, -75 )

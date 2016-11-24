@@ -28,9 +28,10 @@ func _ready():
 	var scene = load("res://scenes/horse.tscn")
 	var horse = scene.instance()
 	get_node("map").add_child(horse)
+	#get_node("map/horse").set_global_pos(Vector2(0,BOT_POSITION_Y))
 	var popup_menu_scene = load("res://scenes/popup_menu.tscn")
 	var popup_menu = popup_menu_scene.instance()
-	get_node(".").add_child(popup_menu)	
+	get_node(".").add_child(popup_menu)
 	
 	
 func _input(event):
@@ -67,17 +68,29 @@ func _input(event):
 
 func _fixed_process(delta):
 	if get_node("map/horse/kinematic_horse").is_colliding():
-		print("Mueres")
-		get_node("map/horse").free()
-		get_node("map").free()
-		var scene_map = load("res://scenes/map4.tscn")
-		var map = scene_map.instance()
-		get_node(".").add_child(map)
-		var scene = load("res://scenes/horse.tscn")
-		var horse = scene.instance()
-		get_node("map").add_child(horse)
-		horse_state = 0
-		horse_moving = false
+		var collision_object = get_node("map/horse/kinematic_horse").get_collider()
+		var collision_name = object.get_name()
+		if (collision_name == "firewall"):
+			print("Mueres")
+			get_node("map/horse").free()
+			var scene = load("res://scenes/horse.tscn")
+			var horse = scene.instance()
+			get_node("map").add_child(horse)
+			horse_state = 0
+			horse_moving = false
+			horse_direction = Vector2(horse_speed,0)
+		elif (collision_name == "computer"):
+			print("Capturas computer")
+			var pos_collider = object.get_global_pos()
+			collision_object.free()
+			get_node("map/horse").free()
+			var scene = load("res://scenes/horse.tscn")
+			var horse = scene.instance()
+			get_node("map").add_child(horse)
+			horse_state = 0
+			horse_moving = false
+			horse_direction = Vector2(horse_speed,0)
+			
 	else:
 		if (horse_moving):
 			var temp = get_node("map/horse/kinematic_horse").get_global_pos().y
@@ -101,7 +114,7 @@ func _fixed_process(delta):
 				else:
 					horse_moving = false
 					horse_direction = Vector2(horse_speed,0)
-				
+		
 		get_node("map/horse/kinematic_horse").move(horse_direction)
 		
 func _draw():

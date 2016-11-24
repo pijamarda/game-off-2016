@@ -20,7 +20,6 @@ points = Vector2Array( 1.13382, -20.3822, -12.3752, 46.6224, -28.586, 29.3309, -
 [node name="horse" type="Node2D"]
 
 transform/pos = Vector2( 40.4137, 308 )
-__meta__ = { "_edit_group_":true }
 
 [node name="kinematic_horse" type="KinematicBody2D" parent="."]
 
