@@ -6,13 +6,14 @@ extends Node2D
 # var a=2
 # var b="textvar"
 var screen_size
-var horse_speed = 150
-var horse_direction = 1
+var horse_speed = 4
+var horse_direction = Vector2(horse_speed,0)
 var TOP_POSITION_Y = 64
 var MID_POSITION_Y = 288
 var BOT_POSITION_Y = 480
 var horse_state = 0 # -1 means top, 0 mid, 1 bottom
 var horse_pos = Vector2(32,288)
+var horse_moving = false
 
 
 func _ready():
@@ -29,44 +30,40 @@ func _ready():
 	get_node("map").add_child(horse)
 	var popup_menu_scene = load("res://scenes/popup_menu.tscn")
 	var popup_menu = popup_menu_scene.instance()
-	get_node(".").add_child(popup_menu)
-	
+	get_node(".").add_child(popup_menu)	
 	
 	
 func _input(event):
 	
 	if(event.is_action("horse_up") and event.is_pressed() and !event.is_echo() ):
-		print("pulso arriba")
-		if (horse_state == 0):
-			var temp = get_node("map/horse/kinematic_horse").get_pos().x
-			get_node("map/horse/kinematic_horse").move_to(Vector2(temp,TOP_POSITION_Y))
-			horse_state = -1
-		elif (horse_state == 1):
-			var temp = get_node("map/horse/kinematic_horse").get_pos().x
-			get_node("map/horse/kinematic_horse").move_to(Vector2(temp,MID_POSITION_Y))
-			horse_state = 0
+		if (not horse_moving):
+			if (horse_state == 0):
+				print("move up")
+				horse_direction = Vector2(horse_speed,-horse_speed)
+				horse_state = -1
+				horse_moving = true
+			elif (horse_state == 1):
+				horse_direction = Vector2(horse_speed,-horse_speed)
+				horse_state = 0
+				horse_moving = true
 	if(event.is_action("horse_down") and event.is_pressed() and !event.is_echo() ):
-		print("pulso abajo")
-		if (horse_state == -1):
-			var temp = get_node("map/horse/kinematic_horse").get_pos().x
-			get_node("map/horse/kinematic_horse").move_to(Vector2(temp,MID_POSITION_Y))
-			horse_state = 0
-		elif (horse_state == 0):
-			var temp = get_node("map/horse/kinematic_horse").get_pos().x
-			get_node("map/horse/kinematic_horse").move_to(Vector2(temp,BOT_POSITION_Y))
-			horse_state = 1
+		if (not horse_moving):
+			if (horse_state == -1):
+				horse_direction = Vector2(horse_speed,horse_speed)
+				horse_state = 0
+				horse_moving = true
+			elif (horse_state == 0):
+				horse_state = 1
+				horse_direction = Vector2(horse_speed,horse_speed)
+				horse_moving = true
 	if(event.is_action("horse_left") and event.is_pressed() and !event.is_echo() ):
 		print("pulso left")
-		horse_direction = -1
 	if(event.is_action("horse_right") and event.is_pressed() and !event.is_echo() ):
 		print("pulso right")
-		horse_direction = 1
 	if(event.is_action("escape") and event.is_pressed() and !event.is_echo() ):
 		print("pulso escape")
 		get_tree().set_pause(true)
 		get_node("/root/main/game/popupmenu").show()
-		
-		
 
 func _fixed_process(delta):
 	if get_node("map/horse/kinematic_horse").is_colliding():
@@ -79,11 +76,33 @@ func _fixed_process(delta):
 		var scene = load("res://scenes/horse.tscn")
 		var horse = scene.instance()
 		get_node("map").add_child(horse)
+		horse_state = 0
+		horse_moving = false
 	else:
-		get_node("map/horse/kinematic_horse").move(Vector2(horse_direction,0))
-		if (get_node("map/horse/kinematic_horse").get_pos().x < 0 or get_node("map/horse/kinematic_horse").get_pos().x > screen_size.x - 32):
-		    horse_direction = -horse_direction
-		var camera = get_node("map/horse/camera")
+		if (horse_moving):
+			var temp = get_node("map/horse/kinematic_horse").get_global_pos().y
+			print(temp)
+			if horse_state == -1:
+				if temp > TOP_POSITION_Y:
+					print("keep moving to -1")
+				else:
+					horse_moving = false
+					horse_direction = Vector2(horse_speed,0)
+			elif horse_state == 0:
+				if temp != MID_POSITION_Y:
+					print("keep moving to 0")
+				else:
+					horse_moving = false
+					horse_direction = Vector2(horse_speed,0)
+			elif horse_state == 1:
+				if temp < BOT_POSITION_Y:
+					print("keep moving to 1")
+					
+				else:
+					horse_moving = false
+					horse_direction = Vector2(horse_speed,0)
+				
+		get_node("map/horse/kinematic_horse").move(horse_direction)
 		
 func _draw():
 	

@@ -1,16 +1,21 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
-[ext_resource path="res://images/horses/trojanhorse.png" type="Texture" id=1]
+[ext_resource path="res://images/horses/trojanhorse_64x92.png" type="Texture" id=1]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( 33.2635, 21.5403, 45.943, 79.086, -2.82448, 77.1353, -18.9178, 75.1846, -45.7399, 41.535, -46.2276, -18.9367, 4.97833, -36.9807 )
+points = Vector2Array( -12.3752, 46.6224, 1.13382, -20.3822, 13.5621, -48.4809, 31.394, -45.7791, 27.6114, -12.8172, 17.885, 48.7839 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
-points = Vector2Array( 4.97833, -36.9807, 21.5593, -77.9453, 47.4061, -68.1918, 33.2635, 21.5403 )
+points = Vector2Array( 27.6114, -12.8172, 33.0151, 46.6224, 17.885, 48.7839 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 1.13382, -20.3822, -12.3752, 46.6224, -28.586, 29.3309, -31.8282, -12.2768 )
 
 [node name="horse" type="Node2D"]
 
@@ -26,6 +31,9 @@ shapes/0/trigger = false
 shapes/1/shape = SubResource( 2 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
+shapes/2/shape = SubResource( 3 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
 collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
@@ -57,8 +65,8 @@ region_rect = Rect2( 0, 0, 32, 32 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="kinematic_horse"]
 
 build_mode = 0
-polygon = Vector2Array( 21.5593, -77.9453, 4.97833, -36.9807, -46.2276, -18.9367, -45.7399, 41.535, -18.9178, 75.1846, -2.82448, 77.1353, 45.943, 79.086, 33.2635, 21.5403, 47.4061, -68.1918 )
-shape_range = Vector2( 0, 1 )
+polygon = Vector2Array( 13.5621, -48.4809, 1.13382, -20.3822, -31.8282, -12.2768, -28.586, 29.3309, -12.3752, 46.6224, 17.885, 48.7839, 33.0151, 46.6224, 27.6114, -12.8172, 31.394, -45.7791 )
+shape_range = Vector2( 0, 2 )
 trigger = false
 
 
