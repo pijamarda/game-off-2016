@@ -8,12 +8,13 @@ extends Node2D
 var screen_size
 var horse_speed = 4
 var horse_direction = Vector2(horse_speed,0)
-var TOP_POSITION_Y = 64
+var TOP_POSITION_Y = 144
 var MID_POSITION_Y = 288
 var BOT_POSITION_Y = 480
 var horse_state = 0 # -1 means top, 0 mid, 1 bottom
 var horse_pos = Vector2(32,288)
 var horse_moving = false
+var computers_remaining = 3
 
 
 func _ready():
@@ -22,7 +23,7 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	set_process_input(true)
 	set_fixed_process(true)
-	var scene_map = load("res://scenes/map3.tscn")
+	var scene_map = load("res://scenes/levels/level_1_1.tscn")
 	var map = scene_map.instance()
 	get_node(".").add_child(map)
 	var scene = load("res://scenes/horse.tscn")
@@ -69,8 +70,10 @@ func _input(event):
 func _fixed_process(delta):
 	if get_node("map/horse/kinematic_horse").is_colliding():
 		var collision_object = get_node("map/horse/kinematic_horse").get_collider()
-		var collision_name = object.get_name()
-		if (collision_name == "firewall"):
+		var collision_name = collision_object.get_name()
+		print(collision_name)
+		if (collision_name == "firewall" or collision_name == "infected" or collision_name == "cable"):
+			get_node("SamplePlayer").play("grito")
 			print("Mueres")
 			get_node("map/horse").free()
 			var scene = load("res://scenes/horse.tscn")
@@ -81,8 +84,14 @@ func _fixed_process(delta):
 			horse_direction = Vector2(horse_speed,0)
 		elif (collision_name == "computer"):
 			print("Capturas computer")
-			var pos_collider = object.get_global_pos()
-			collision_object.free()
+			computers_remaining = computers_remaining - 1
+			var pos_collider = collision_object.get_global_pos()
+			print(pos_collider)
+			collision_object.get_parent().free()
+			var infected_res = load("res://scenes/infected.tscn")
+			var infected = infected_res.instance()
+			infected.set_global_pos(pos_collider)
+			get_node("map").add_child(infected)
 			get_node("map/horse").free()
 			var scene = load("res://scenes/horse.tscn")
 			var horse = scene.instance()
@@ -94,7 +103,7 @@ func _fixed_process(delta):
 	else:
 		if (horse_moving):
 			var temp = get_node("map/horse/kinematic_horse").get_global_pos().y
-			print(temp)
+			#print(temp)
 			if horse_state == -1:
 				if temp > TOP_POSITION_Y:
 					print("keep moving to -1")
@@ -116,7 +125,16 @@ func _fixed_process(delta):
 					horse_direction = Vector2(horse_speed,0)
 		
 		get_node("map/horse/kinematic_horse").move(horse_direction)
-		
+	if (computers_remaining == 0):
+		computers_remaining = 3
+		get_node("map/horse").free()
+		get_node("map").free()
+		var scene_map = load("res://scenes/levels/level_1_2.tscn")
+		var map = scene_map.instance()
+		get_node(".").add_child(map)
+		var scene = load("res://scenes/horse.tscn")
+		var horse = scene.instance()
+		get_node("map").add_child(horse)
 func _draw():
 	
 	pass
