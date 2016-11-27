@@ -6,17 +6,17 @@
 [ext_resource path="res://images/firewalls/Firewall_96x128.png" type="Texture" id=4]
 [ext_resource path="res://images/computers/Comp.png" type="Texture" id=5]
 
-[sub_resource type="ConvexPolygonShape2D" id=6]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
 points = Vector2Array( 12.6106, -87.8206, 82.1031, -28.2556, 26.1481, 79.1419, -9.9519, 95.3869, -68.6144, 71.9219, -76.7369, -4.79056, -59.5894, -90.528 )
 
-[sub_resource type="ConvexPolygonShape2D" id=7]
+[sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -29.8007, -42.2119, -43.5717, -63.7664, 33.0667, -51.7916, 49.2325, -18.2624 )
 
-[sub_resource type="ConvexPolygonShape2D" id=8]
+[sub_resource type="ConvexPolygonShape2D" id=3]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -42.3741, 48.1974, -45.9666, -7.48511, -29.8007, -42.2119, 49.2325, -18.2624, 16.9008, 54.1848, -10.6411, 64.3633 )
@@ -66,7 +66,7 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -92,7 +92,7 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite2"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -118,7 +118,7 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite5"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -144,7 +144,7 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite10"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -170,7 +170,7 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite11"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -196,10 +196,10 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite1"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 8 )
+shapes/1/shape = SubResource( 3 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
 collision/layers = 1
@@ -225,10 +225,10 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite6"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 8 )
+shapes/1/shape = SubResource( 3 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
 collision/layers = 1
@@ -254,10 +254,10 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite7"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 8 )
+shapes/1/shape = SubResource( 3 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
 collision/layers = 1
@@ -283,10 +283,10 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite8"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 8 )
+shapes/1/shape = SubResource( 3 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
 collision/layers = 1
@@ -312,10 +312,10 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite9"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 8 )
+shapes/1/shape = SubResource( 3 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
 collision/layers = 1
@@ -341,10 +341,10 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite12"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 8 )
+shapes/1/shape = SubResource( 3 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
 collision/layers = 1
@@ -370,10 +370,10 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite13"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 8 )
+shapes/1/shape = SubResource( 3 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
 collision/layers = 1
@@ -399,10 +399,10 @@ __meta__ = { "_edit_group_":true }
 [node name="firewall" type="StaticBody2D" parent="Sprite14"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 8 )
+shapes/1/shape = SubResource( 3 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
 collision/layers = 1
@@ -500,6 +500,35 @@ friction = 1.0
 bounce = 0.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite4/computer"]
+
+build_mode = 0
+polygon = Vector2Array( -41.7552, -57.1962, -39.765, 15.78, -56.3505, 58.239, 61.075, 58.239, 45.1528, 16.4435, 45.1528, -58.5231 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="Sprite15" type="Sprite" parent="."]
+
+transform/pos = Vector2( 511.048, 305.64 )
+texture = ExtResource( 5 )
+__meta__ = { "_edit_group_":true }
+
+[node name="computer" type="StaticBody2D" parent="Sprite15"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 5 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite15/computer"]
 
 build_mode = 0
 polygon = Vector2Array( -41.7552, -57.1962, -39.765, 15.78, -56.3505, 58.239, 61.075, 58.239, 45.1528, 16.4435, 45.1528, -58.5231 )

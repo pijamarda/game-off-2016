@@ -11,10 +11,12 @@ var horse_direction = Vector2(horse_speed,0)
 var TOP_POSITION_Y = 144
 var MID_POSITION_Y = 288
 var BOT_POSITION_Y = 480
+var PAUSE_TIME = 1
 var horse_state = 0 # -1 means top, 0 mid, 1 bottom
 var horse_pos = Vector2(32,288)
 var horse_moving = false
 var computers_remaining = 3
+var time_left = PAUSE_TIME
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -87,21 +89,26 @@ func _fixed_process(delta):
 			horse_direction = Vector2(horse_speed,0)
 		elif (collision_name == "computer"):
 			print("Capturas computer")
-			computers_remaining = computers_remaining - 1
-			var pos_collider = collision_object.get_global_pos()
-			print(pos_collider)
-			collision_object.get_parent().free()
-			var infected_res = load("res://scenes/infected.tscn")
-			var infected = infected_res.instance()
-			infected.set_global_pos(pos_collider)
-			get_node("map").add_child(infected)
-			get_node("map/horse").free()
-			var scene = load("res://scenes/horse.tscn")
-			var horse = scene.instance()
-			get_node("map").add_child(horse)
-			horse_state = 0
-			horse_moving = false
-			horse_direction = Vector2(horse_speed,0)
+			if (time_left < 0 ):
+				computers_remaining = computers_remaining - 1
+				var pos_collider = collision_object.get_global_pos()
+				print(pos_collider)
+				collision_object.get_parent().free()
+				var infected_res = load("res://scenes/infected.tscn")
+				var infected = infected_res.instance()
+				infected.set_global_pos(pos_collider)
+				get_node("map").add_child(infected)
+				get_node("map/horse").free()
+				var scene = load("res://scenes/horse.tscn")
+				var horse = scene.instance()
+				get_node("map").add_child(horse)
+				horse_state = 0
+				horse_moving = false
+				horse_direction = Vector2(horse_speed,0)
+				time_left = PAUSE_TIME
+			else:
+				#print(time_left)
+				time_left = time_left - delta
 			
 	else:
 		if (horse_moving):
