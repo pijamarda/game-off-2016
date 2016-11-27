@@ -6,7 +6,7 @@ extends Node2D
 # var a=2
 # var b="textvar"
 var screen_size
-var horse_speed = 4
+var horse_speed = 3
 var horse_direction = Vector2(horse_speed,0)
 var TOP_POSITION_Y = 144
 var MID_POSITION_Y = 288
@@ -15,7 +15,6 @@ var horse_state = 0 # -1 means top, 0 mid, 1 bottom
 var horse_pos = Vector2(32,288)
 var horse_moving = false
 var computers_remaining = 3
-
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -62,7 +61,11 @@ func _input(event):
 		print("pulso left")
 	if(event.is_action("horse_right") and event.is_pressed() and !event.is_echo() ):
 		print("pulso right")
-	if(event.is_action("escape") and event.is_pressed() and !event.is_echo() ):
+	if(event.is_action("escape") and event.is_pressed() and !event.is_echo()):
+		var temp_global = get_node("/root/main/game/map/horse/kinematic_horse").get_global_pos()
+		temp_global.x = temp_global.x - 100
+		temp_global.y = temp_global.y - 100
+		get_node("/root/main/game/popupmenu").set_global_pos(temp_global)
 		print("pulso escape")
 		get_tree().set_pause(true)
 		get_node("/root/main/game/popupmenu").show()
@@ -106,19 +109,20 @@ func _fixed_process(delta):
 			#print(temp)
 			if horse_state == -1:
 				if temp > TOP_POSITION_Y:
-					print("keep moving to -1")
+					#print("keep moving to -1")
+					pass
 				else:
 					horse_moving = false
 					horse_direction = Vector2(horse_speed,0)
 			elif horse_state == 0:
 				if temp != MID_POSITION_Y:
-					print("keep moving to 0")
+					pass
 				else:
 					horse_moving = false
 					horse_direction = Vector2(horse_speed,0)
 			elif horse_state == 1:
 				if temp < BOT_POSITION_Y:
-					print("keep moving to 1")
+					pass
 					
 				else:
 					horse_moving = false
