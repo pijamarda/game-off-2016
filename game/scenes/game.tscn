@@ -3,7 +3,6 @@
 [ext_resource path="res://scenes/game.gd" type="Script" id=1]
 [ext_resource path="res://sounds/grito.smp" type="Sample" id=2]
 
-
 [sub_resource type="SampleLibrary" id=1]
 
 samples/grito = { "db":0.0, "pitch":1.0, "sample":ExtResource( 2 ) }

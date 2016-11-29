@@ -28,18 +28,14 @@ texture = ExtResource( 2 )
 
 [node name="start_button" type="MenuButton" parent="."]
 
-anchor/left = 2
-anchor/top = 2
-anchor/right = 2
-anchor/bottom = 2
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 0
 size_flags/vertical = 0
-margin/left = 0.4
-margin/top = 0.421053
-margin/right = 0.665
-margin/bottom = 0.585526
+margin/left = 294.0
+margin/top = 202.0
+margin/right = 506.0
+margin/bottom = 302.0
 toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 2
@@ -54,10 +50,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 0
 size_flags/vertical = 0
-margin/left = 320.0
-margin/top = 384.0
-margin/right = 532.0
-margin/bottom = 484.0
+margin/left = 294.0
+margin/top = 306.0
+margin/right = 506.0
+margin/bottom = 406.0
 toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 2

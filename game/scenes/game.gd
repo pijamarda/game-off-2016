@@ -1,10 +1,5 @@
-
 extends Node2D
 
-
-# member variables here, example:
-# var a=2
-# var b="textvar"
 var screen_size
 var horse_speed = 3
 var horse_direction = Vector2(horse_speed,0)
@@ -20,25 +15,35 @@ var time_left = PAUSE_TIME
 var bajando = false
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
+
 	screen_size = get_viewport_rect().size
 	set_process_input(true)
 	set_fixed_process(true)
+	#	Instanciamos el primer nivel del juego
 	var scene_map = load("res://scenes/levels/level_1_1.tscn")
 	var map = scene_map.instance()
+	#	y lo attachamos al nodo "GAME"
 	get_node(".").add_child(map)
-	var scene = load("res://scenes/horse.tscn")
-	var horse = scene.instance()
+	#	Instanciamos el caballo que vamos a manejar
+	#	y lo attachamos a la escena MAP
+	var horse_scene = load("res://scenes/horse.tscn")
+	var horse = horse_scene.instance()
 	get_node("map").add_child(horse)
-	#get_node("map/horse").set_global_pos(Vector2(0,BOT_POSITION_Y))
+	#	Instanciamos el popup_menu de la pausa
+	#	y lo attachamos a la escena GAME
 	var popup_menu_scene = load("res://scenes/popup_menu.tscn")
 	var popup_menu = popup_menu_scene.instance()
-	get_node(".").add_child(popup_menu)
-	
+	get_node(".").add_child(popup_menu)	
 	
 func _input(event):
 	
+	if (event.type == InputEvent.SCREEN_TOUCH):
+		var local_event = make_input_local(event)
+		print(local_event.pos)
+	if (event.type == InputEvent.MOUSE_BUTTON):
+		var local_event = make_input_local(event)
+		print(local_event.pos)
+
 	if(event.is_action("horse_up") and event.is_pressed() and !event.is_echo() ):
 		if (not horse_moving):
 			if (horse_state == 0):
@@ -145,7 +150,7 @@ func _fixed_process(delta):
 					horse_moving = false
 					horse_direction = Vector2(horse_speed,0)
 		
-		get_node("map/horse/kinematic_horse").move(horse_direction)
+		#get_node("map/horse/kinematic_horse").move(horse_direction)
 	if (computers_remaining == 0):
 		computers_remaining = 3
 		get_node("map/horse").free()
