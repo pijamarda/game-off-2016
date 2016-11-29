@@ -17,6 +17,7 @@ var horse_pos = Vector2(32,288)
 var horse_moving = false
 var computers_remaining = 3
 var time_left = PAUSE_TIME
+var bajando = false
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -49,12 +50,14 @@ func _input(event):
 				horse_direction = Vector2(horse_speed,-horse_speed)
 				horse_state = 0
 				horse_moving = true
+				bajando = false
 	if(event.is_action("horse_down") and event.is_pressed() and !event.is_echo() ):
 		if (not horse_moving):
 			if (horse_state == -1):
 				horse_direction = Vector2(horse_speed,horse_speed)
 				horse_state = 0
 				horse_moving = true
+				bajando = true
 			elif (horse_state == 0):
 				horse_state = 1
 				horse_direction = Vector2(horse_speed,horse_speed)
@@ -121,12 +124,19 @@ func _fixed_process(delta):
 				else:
 					horse_moving = false
 					horse_direction = Vector2(horse_speed,0)
-			elif horse_state == 0:
-				if temp != MID_POSITION_Y:
-					pass
+			elif (horse_state == 0):
+				if bajando:
+					if temp < MID_POSITION_Y:
+						pass
+					else:
+						horse_moving = false
+						horse_direction = Vector2(horse_speed,0)
 				else:
-					horse_moving = false
-					horse_direction = Vector2(horse_speed,0)
+					if temp > MID_POSITION_Y:
+						pass
+					else:
+						horse_moving = false
+						horse_direction = Vector2(horse_speed,0)
 			elif horse_state == 1:
 				if temp < BOT_POSITION_Y:
 					pass
