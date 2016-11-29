@@ -34,6 +34,9 @@ var time_left = PAUSE_TIME
 #	moviendo, es en direccion arriba o abajo
 var bajando = false
 
+#
+var nivel = 1
+
 func _ready():
 
 	#	Quizas nos sea util en el futuro saber el tamaño de la pantalla
@@ -175,12 +178,21 @@ func _fixed_process(delta):
 		#TODO
 		get_node("map/horse/kinematic_horse").move(horse_direction)
 	if (computers_remaining == 0):
-		computers_remaining = 3
-		get_node("map/horse").free()
-		get_node("map").free()
-		var scene_map = load("res://scenes/levels/level_1_2.tscn")
-		var map = scene_map.instance()
-		get_node(".").add_child(map)
-		var scene = load("res://scenes/horse.tscn")
-		var horse = scene.instance()
-		get_node("map").add_child(horse)
+		if nivel == 2:
+			get_tree().set_pause(true)
+			get_node("map/horse").free()
+			get_node("map").free()
+			var scene_end = load("res://scenes/end.tscn")
+			var end = scene_end.instance()
+			get_node("/root/main").add_child(end)
+		else:
+			computers_remaining = 3
+			nivel = nivel + 1
+			get_node("map/horse").free()
+			get_node("map").free()
+			var scene_map = load("res://scenes/levels/level_1_2.tscn")
+			var map = scene_map.instance()
+			get_node(".").add_child(map)
+			var scene = load("res://scenes/horse.tscn")
+			var horse = scene.instance()
+			get_node("map").add_child(horse)
