@@ -1,21 +1,42 @@
 extends Node2D
 
-var screen_size
-var horse_speed = 3
-var horse_direction = Vector2(horse_speed,0)
+#	CONSTANTES
 var TOP_POSITION_Y = 144
 var MID_POSITION_Y = 288
 var BOT_POSITION_Y = 480
 var PAUSE_TIME = 1
+
+# VARIABLES
+
+var screen_size
+#	La velocidad del caballo ira aumentando segun capturemos ordenadores
+var horse_speed = 3
+var horse_direction = Vector2(horse_speed,0)
+#	horse_state indica hacia donde ha elegido el usuario moverse
+#	y donde esta el caballo actualmente
+#	-1	quiere decir arriba
+#	0	es el centro
+#	1	es abajo
 var horse_state = 0 # -1 means top, 0 mid, 1 bottom
-var horse_pos = Vector2(32,288)
+
+#	Cuando el caballo esta cambiando de posicion esta variable pasa a
+#	ser TRUE y no se admiten cambios de direccion
 var horse_moving = false
+
+#	Al prinipio tenemos 3 computadoras, segun vamos capturando
+#	vamos cambiando la variable
 var computers_remaining = 3
+
+#	Cuanto tiempo esperamos despues de capturar el ordenador
 var time_left = PAUSE_TIME
+
+#	Utilizamos esta variable para saber si cuando el caballo se esta
+#	moviendo, es en direccion arriba o abajo
 var bajando = false
 
 func _ready():
 
+	#	Quizas nos sea util en el futuro saber el tamaño de la pantalla
 	screen_size = get_viewport_rect().size
 	set_process_input(true)
 	set_fixed_process(true)
@@ -33,7 +54,7 @@ func _ready():
 	#	y lo attachamos a la escena GAME
 	var popup_menu_scene = load("res://scenes/popup_menu.tscn")
 	var popup_menu = popup_menu_scene.instance()
-	get_node(".").add_child(popup_menu)	
+	get_node(".").add_child(popup_menu)
 	
 func _input(event):
 	
@@ -43,18 +64,24 @@ func _input(event):
 	if (event.type == InputEvent.MOUSE_BUTTON):
 		var local_event = make_input_local(event)
 		print(local_event.pos)
-
+	
+	#	Hemos definido la accion horse_up en el INPUT del proyecto
 	if(event.is_action("horse_up") and event.is_pressed() and !event.is_echo() ):
+		#	Primero vamos a comprobar si el caballo no esta en una transicion de movimiento
 		if (not horse_moving):
-			if (horse_state == 0):
-				print("move up")
+			#	Si no se esta moviendo vamos a ver en cual de los cables se encuentra
+			if (horse_state == 0):	# esta en el medio
+				#	Si esta en el medio se puede mover hacia arriba
 				horse_direction = Vector2(horse_speed,-horse_speed)
 				horse_state = -1
 				horse_moving = true
-			elif (horse_state == 1):
+			elif (horse_state == 1):	# Esta abajo
+				#	Entonces se puede mover hacia el medio
 				horse_direction = Vector2(horse_speed,-horse_speed)
 				horse_state = 0
 				horse_moving = true
+				#	Como se mueve hacia el medio, hay que notificar en que direccion
+				#	esto lo hacemos con la variable "bajando" indicando que esta subiendo
 				bajando = false
 	if(event.is_action("horse_down") and event.is_pressed() and !event.is_echo() ):
 		if (not horse_moving):
@@ -67,10 +94,7 @@ func _input(event):
 				horse_state = 1
 				horse_direction = Vector2(horse_speed,horse_speed)
 				horse_moving = true
-	if(event.is_action("horse_left") and event.is_pressed() and !event.is_echo() ):
-		print("pulso left")
-	if(event.is_action("horse_right") and event.is_pressed() and !event.is_echo() ):
-		print("pulso right")
+
 	if(event.is_action("escape") and event.is_pressed() and !event.is_echo()):
 		var temp_global = get_node("/root/main/game/map/horse/kinematic_horse").get_global_pos()
 		temp_global.x = temp_global.x - 100
@@ -150,7 +174,8 @@ func _fixed_process(delta):
 					horse_moving = false
 					horse_direction = Vector2(horse_speed,0)
 		
-		#get_node("map/horse/kinematic_horse").move(horse_direction)
+		#TODO
+		get_node("map/horse/kinematic_horse").move(horse_direction)
 	if (computers_remaining == 0):
 		computers_remaining = 3
 		get_node("map/horse").free()
