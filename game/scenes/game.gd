@@ -5,6 +5,8 @@ var TOP_POSITION_Y = 144
 var MID_POSITION_Y = 288
 var BOT_POSITION_Y = 480
 var PAUSE_TIME = 1
+var WAIT_INPUT = true
+var time_wait = 0.5
 
 # VARIABLES
 
@@ -41,7 +43,7 @@ func _ready():
 
 	#	Quizas nos sea util en el futuro saber el tamaño de la pantalla
 	screen_size = get_viewport_rect().size
-	set_process_input(true)
+	#set_process_input(true)
 	set_fixed_process(true)
 	#	Instanciamos el primer nivel del juego
 	var scene_map = load("res://scenes/levels/level_1_1.tscn")
@@ -61,15 +63,8 @@ func _ready():
 	
 func _input(event):
 	
-	if (event.type == InputEvent.SCREEN_TOUCH):
-		var local_event = make_input_local(event)
-		print(local_event.pos)
-	if (event.type == InputEvent.MOUSE_BUTTON):
-		var local_event = make_input_local(event)
-		print(local_event.pos)
-	
 	#	Hemos definido la accion horse_up en el INPUT del proyecto
-	if(event.is_action("horse_up") and event.is_pressed() and !event.is_echo() ):
+	if((event.is_action("horse_up") and event.is_pressed() and !event.is_echo()) or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y < MID_POSITION_Y)):
 		#	Primero vamos a comprobar si el caballo no esta en una transicion de movimiento
 		if (not horse_moving):
 			#	Si no se esta moviendo vamos a ver en cual de los cables se encuentra
@@ -86,7 +81,7 @@ func _input(event):
 				#	Como se mueve hacia el medio, hay que notificar en que direccion
 				#	esto lo hacemos con la variable "bajando" indicando que esta subiendo
 				bajando = false
-	if(event.is_action("horse_down") and event.is_pressed() and !event.is_echo() ):
+	if(event.is_action("horse_down") and event.is_pressed() and !event.is_echo() or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y > MID_POSITION_Y)):
 		if (not horse_moving):
 			if (horse_state == -1):
 				horse_direction = Vector2(horse_speed,horse_speed)
@@ -108,6 +103,12 @@ func _input(event):
 		get_node("/root/main/game/popupmenu").show()
 
 func _fixed_process(delta):
+	if WAIT_INPUT:
+		if time_wait > 0:
+			time_wait = time_wait - delta
+		else:
+			WAIT_INPUT = false
+			set_process_input(true)
 	if get_node("map/horse/kinematic_horse").is_colliding():
 		var collision_object = get_node("map/horse/kinematic_horse").get_collider()
 		var collision_name = collision_object.get_name()

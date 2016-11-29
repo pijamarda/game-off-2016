@@ -12,3 +12,4 @@ func _on_start_button_pressed():
 	var scene_game = load("res://scenes/game.tscn")
 	var game = scene_game.instance()
 	get_node("/root/main").add_child(game)
+	
