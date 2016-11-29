@@ -145,10 +145,8 @@ func _fixed_process(delta):
 	else:
 		if (horse_moving):
 			var temp = get_node("map/horse/kinematic_horse").get_global_pos().y
-			#print(temp)
 			if horse_state == -1:
 				if temp > TOP_POSITION_Y:
-					#print("keep moving to -1")
 					pass
 				else:
 					horse_moving = false
@@ -186,8 +184,3 @@ func _fixed_process(delta):
 		var scene = load("res://scenes/horse.tscn")
 		var horse = scene.instance()
 		get_node("map").add_child(horse)
-func _draw():
-	
-	pass
-
-
