@@ -9,6 +9,7 @@ Complete each level by hacking each of the three computers at the end of the cir
 Your Trojan horses will be sent automatically from the beginning of each level. To avoid the Firewalls, you must use buttons w & s to jump from one circuit to another. You will complete a level when all three computers are infected.
 
 Game can be played at http://troyan.vindrogames.com  
+Use Firefox for a better experience.  
 
 Move the troyan horse up and down with:  
 Keyboard: 🡑, 🡓 or W, S   
