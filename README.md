@@ -10,8 +10,8 @@ Your Trojan horses will be sent automatically from the beginning of each level. 
 
 Game can be played at http://troyan.vindrogames.com  
 
-Move the troyan horse with:  
-W, D with keyboard.  
+Move the troyan horse up and down with:  
+Keyboard: 🡑, 🡓 or W, S   
 Touchscreen: Touch the upper or the lower part of the screen.  
 Mouse: Click the upper or the lower part of the screen.
 
