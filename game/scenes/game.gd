@@ -63,8 +63,11 @@ func _ready():
 	
 func _input(event):
 	
+	#	En vez de tener que pulsar arriba o abajo de la mitad de la pantalla.
+	#	vamos a cambiarlo para que sea pulsando encima o debajo del caballo
+	var temp_horse_pos = get_node("/root/main/game/map/horse/kinematic_horse").get_global_pos()
 	#	Hemos definido la accion horse_up en el INPUT del proyecto
-	if((event.is_action("horse_up") and event.is_pressed() and !event.is_echo()) or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y < MID_POSITION_Y)):
+	if((event.is_action("horse_up") and event.is_pressed() and !event.is_echo()) or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y < temp_horse_pos.y)):
 		#	Primero vamos a comprobar si el caballo no esta en una transicion de movimiento
 		if (not horse_moving):
 			#	Si no se esta moviendo vamos a ver en cual de los cables se encuentra
@@ -81,7 +84,9 @@ func _input(event):
 				#	Como se mueve hacia el medio, hay que notificar en que direccion
 				#	esto lo hacemos con la variable "bajando" indicando que esta subiendo
 				bajando = false
-	if(event.is_action("horse_down") and event.is_pressed() and !event.is_echo() or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y > MID_POSITION_Y)):
+	#	TODO: Hay que ajustar la zona de pulsacion del caballo, es posible que la posicion devuelta
+	#	sea la esuina superior izquierda
+	if(event.is_action("horse_down") and event.is_pressed() and !event.is_echo() or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y > temp_horse_pos.y)):
 		if (not horse_moving):
 			if (horse_state == -1):
 				horse_direction = Vector2(horse_speed,horse_speed)
@@ -93,11 +98,13 @@ func _input(event):
 				horse_direction = Vector2(horse_speed,horse_speed)
 				horse_moving = true
 
+	#	Menu popup de Pausa
 	if(event.is_action("escape") and event.is_pressed() and !event.is_echo()):
-		var temp_global = get_node("/root/main/game/map/horse/kinematic_horse").get_global_pos()
-		temp_global.x = temp_global.x - 100
-		temp_global.y = temp_global.y - 100
-		get_node("/root/main/game/popupmenu").set_global_pos(temp_global)
+		
+		# como el caballo esta en el centro vamos a colocar el 
+		temp_horse_pos.x = temp_horse_pos.x - 100
+		temp_horse_pos.y = temp_horse_pos.y - 100
+		get_node("/root/main/game/popupmenu").set_global_pos(temp_horse_pos)
 		print("pulso escape")
 		get_tree().set_pause(true)
 		get_node("/root/main/game/popupmenu").show()
